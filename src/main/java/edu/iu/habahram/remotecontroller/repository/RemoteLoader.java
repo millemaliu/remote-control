@@ -31,7 +31,7 @@ public class RemoteLoader implements  IRemoteLoader{
     
     
     public static RemoteLoader getInstance() {
-        return uniqueInstance
+        return uniqueInstance;
     }
 
     @Override
