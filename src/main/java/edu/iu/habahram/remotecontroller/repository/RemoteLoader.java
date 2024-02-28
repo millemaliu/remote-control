@@ -28,6 +28,7 @@ public class RemoteLoader implements  IRemoteLoader{
                         return o;
                     };
                     remoteControl.setCommand(device.slot(), on, stereo::off);
+                    break;
                 case "fan":
                     CeilingFan fan = new CeilingFan(device.location());
                     remoteControl.setCommand(device.slot(), fan::setMedium, fan::off);
