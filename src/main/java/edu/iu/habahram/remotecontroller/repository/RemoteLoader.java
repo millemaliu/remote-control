@@ -1,8 +1,6 @@
 package edu.iu.habahram.remotecontroller.repository;
 
-import edu.iu.habahram.remotecontroller.model.DeviceData;
-import edu.iu.habahram.remotecontroller.model.Light;
-import edu.iu.habahram.remotecontroller.model.RemoteControl;
+import edu.iu.habahram.remotecontroller.model.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,6 +19,18 @@ public class RemoteLoader implements  IRemoteLoader{
                     Light light = new Light(device.location());
                     remoteControl.setCommand(device.slot(), light::on, light::off);
                     break;
+                case "stereo":
+                    Stereo stereo = new Stereo(device.location());
+                    Command on = () -> {
+                        String o = stereo.on();
+                        stereo.setVolume(8);
+                        stereo.setCd(true);
+                        return o;
+                    };
+                    remoteControl.setCommand(device.slot(), on, stereo::off);
+                case "fan":
+                    CeilingFan fan = new CeilingFan(device.location());
+                    remoteControl.setCommand(device.slot(), fan::setMedium, fan::off);
             }
         }
         remoteControls.put(id, remoteControl);
